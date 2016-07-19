@@ -1,0 +1,15 @@
+DROP DATABASE IF EXISTS `thingMysql`;
+CREATE DATABASE IF NOT EXISTS `thingMysql` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+USE `thingMysql`;
+
+CREATE TABLE `thing` (
+	`uid` INT NOT NULL AUTO_INCREMENT,
+	`user` VARCHAR(50) NOT NULL,
+	`title` VARCHAR(50) NOT NULL,
+	`details` VARCHAR(50) NOT NULL DEFAULT 0,
+	`createtime` DateTime NOT NULL,
+	`importance` INT NOT NULL,
+	`done` INT NOT NULL DEFAULT 0,
+	PRIMARY KEY (`uid`),
+UNIQUE INDEX `uid_UNIQUE` (`uid` ASC)
+)ENGINE = InnoDB;

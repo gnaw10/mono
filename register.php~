@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+<?php
+
+mysql_connect('localhost', 'root', 'bj123456'); // mysql -uroot -proot
+mysql_select_db('testMysql'); // USE testMysql;
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$username = $_POST['username'];
+	$password = MD5($_POST['password']);
+	$sql = "select * from admin where username='$username1'";
+	$rs = mysql_query($sql, $conn);
+	if(mysql_num_rows($rs)>0)
+	{
+  	 echo "用户名已存在，请重新注册！";
+  	echo "<a href=index.php>[注册]</a>";
+	} 
+	else
+	{
+mysql_query('INSERT INTO `user` (`username`, `password`) VALUES ("'.$username.'", "'.$password.'");');
+}
+	// $uid = mysql_insert_id();
+}
+$sqlUser = mysql_query('SELECT * FROM `user`;');
+// var_dump($sqlUser);
+$list = [];
+$data = [];
+while(($data = mysql_fetch_assoc($sqlUser)) !== false) {
+	array_push($list, $data);
+}
+// var_dump($data);
+?>
+<form method="post" action="register.php">
+<input type="text" name="username">
+<input type="password" name="password">
+<input type="submit" value="register">
+</form>
+<pre>
+<?php print_r($list);?>
+</pre>
